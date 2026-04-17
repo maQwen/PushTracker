@@ -1,0 +1,48 @@
+```
+# Android build artifacts
+*.apk
+*.aar
+*.dex
+
+# Android build outputs
+build/
+.externalNativeBuild/
+
+# Android Studio files
+*.iml
+*.iws
+*.ipr
+.idea/
+.gradle/
+local.properties
+
+# Android generated files
+gen/
+bin/
+obj/
+
+# Android cache
+.cache/
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.properties
+
+# Windows thumbnail cache
+Thumbs.db
+ehthumbs.db
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*
+```
