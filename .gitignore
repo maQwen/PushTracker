@@ -1,48 +1,84 @@
 ```
-# Android build artifacts
-*.apk
-*.aar
-*.dex
+# Dependencies
+.gradle/
+node_modules/
 
-# Android build outputs
+# Build artifacts
 build/
-.externalNativeBuild/
+dist/
+target/
 
-# Android Studio files
-*.iml
-*.iws
-*.ipr
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
 .idea/
-.gradle/
-local.properties
-
-# Android generated files
-gen/
-bin/
-obj/
-
-# Android cache
-.cache/
-
-# Gradle
-.gradle/
-!gradle/wrapper/gradle-wrapper.properties
-
-# Windows thumbnail cache
-Thumbs.db
-ehthumbs.db
-
-# macOS
-.DS_Store
-
-# Linux
-*~
+*.swp
+*.swo
 
 # Logs
 *.log
 
-# Environment variables
-.env
-.env.local
-.env.*
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.so
+
+# Temporary files
+*.tmp
+*~
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# MyPy
+.mypy_cache/
+
+# PyTest
+.pytest_cache/
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
 ```
