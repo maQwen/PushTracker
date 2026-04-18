@@ -11,6 +11,6 @@ jobs:
     steps:
 
       - name: Update Gradle Wrapper
-        uses: gradle/update-gradle-wrapper-action@v2
-        with:
-          gradle-version: '8.14.4'
+        run: | 
+           ./gradlew wrapper --gradle-version=8.14.4
+           ./gradlew build        
