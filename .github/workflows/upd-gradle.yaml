@@ -1,4 +1,4 @@
-﻿name: Publish Snapshot
+﻿name: Update Gradle
 on:
   workflow_dispatch:
 
