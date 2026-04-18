@@ -1,4 +1,4 @@
-package com.pushnotifier.data
+package com.pushtracker.data
 
 import android.content.Context
 import androidx.room.Database
@@ -18,7 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "push_notifier_database"
+                    "push_tracker_database"
                 ).build()
                 INSTANCE = instance
                 instance

@@ -3,7 +3,7 @@
 # proguardFiles setting in build.gradle.kts.
 
 # Keep Room entities
--keep class com.pushnotifier.data.** { *; }
+-keep class com.pushtracker.data.** { *; }
 
 # Coroutines
 -dontwarn kotlinx.coroutines.**

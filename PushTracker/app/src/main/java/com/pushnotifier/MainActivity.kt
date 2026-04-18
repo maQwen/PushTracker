@@ -1,4 +1,4 @@
-package com.pushnotifier
+package com.pushtracker
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,8 +11,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pushnotifier.data.AppDatabase
-import com.pushnotifier.databinding.ActivityMainBinding
+import com.pushtracker.data.AppDatabase
+import com.pushtracker.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

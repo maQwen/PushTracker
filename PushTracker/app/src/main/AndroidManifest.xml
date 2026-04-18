@@ -13,12 +13,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PushNotifier">
+        android:theme="@style/Theme.PushTracker">
 
         <activity
             android:name=".PermissionActivity"
             android:exported="true"
-            android:theme="@style/Theme.PushNotifier">
+            android:theme="@style/Theme.PushTracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +28,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.PushNotifier" />
+            android:theme="@style/Theme.PushTracker" />
 
         <!-- Notification Listener Service -->
         <service

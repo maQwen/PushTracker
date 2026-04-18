@@ -1,4 +1,4 @@
-package com.pushnotifier.data
+package com.pushtracker.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

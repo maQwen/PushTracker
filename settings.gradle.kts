@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PushNotifier"
+rootProject.name = "PushTracker"
 include(":app")

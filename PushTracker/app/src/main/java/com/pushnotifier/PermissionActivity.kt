@@ -1,4 +1,4 @@
-package com.pushnotifier
+package com.pushtracker
 
 import android.Manifest
 import android.content.Intent

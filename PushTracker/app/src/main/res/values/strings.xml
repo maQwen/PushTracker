@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Push Notifier</string>
-    <string name="notification_listener_description">Push Notifier needs notification access to capture and save incoming notifications from other apps.</string>
+    <string name="app_name">Push Tracker</string>
+    <string name="notification_listener_description">Push Tracker needs notification access to capture and save incoming notifications from other apps.</string>
     <string name="permission_required">Notification Access Required</string>
     <string name="grant_permission">Grant Permission</string>
     <string name="settings">Settings</string>

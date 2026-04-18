@@ -1,4 +1,4 @@
-package com.pushnotifier.data
+package com.pushtracker.data
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

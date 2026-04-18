@@ -1,4 +1,4 @@
-package com.pushnotifier
+package com.pushtracker
 
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
@@ -7,8 +7,8 @@ import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.pushnotifier.data.AppDatabase
-import com.pushnotifier.data.PushNotification
+import com.pushtracker.data.AppDatabase
+import com.pushtracker.data.PushNotification
 
 class PushNotificationListener : NotificationListenerService() {
 
@@ -18,7 +18,7 @@ class PushNotificationListener : NotificationListenerService() {
     override fun onCreate() {
         super.onCreate()
         database = AppDatabase.getDatabase(this)
-        Log.d("PushNotifier", "NotificationListenerService created")
+        Log.d("PushTracker", "NotificationListenerService created")
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
@@ -47,16 +47,16 @@ class PushNotificationListener : NotificationListenerService() {
 
             scope.launch {
                 database.pushNotificationDao().insert(notification)
-                Log.d("PushNotifier", "Notification saved: $packageName - $title")
+                Log.d("PushTracker", "Notification saved: $packageName - $title")
             }
         } catch (e: Exception) {
-            Log.e("PushNotifier", "Error processing notification", e)
+            Log.e("PushTracker", "Error processing notification", e)
         }
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
         // Optional: Handle notification removal if needed
-        Log.d("PushNotifier", "Notification removed: ${sbn.packageName}")
+        Log.d("PushTracker", "Notification removed: ${sbn.packageName}")
     }
 
     private fun bundleToString(bundle: Bundle): String {

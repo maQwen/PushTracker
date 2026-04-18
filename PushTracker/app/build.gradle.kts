@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.pushnotifier"
+    namespace = "com.pushtracker"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pushnotifier"
+        applicationId = "com.pushtracker"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
