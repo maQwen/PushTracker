@@ -11,7 +11,9 @@ jobs:
       KEY1: ${{ secrets.KEYSTORE_BASE64 }}
 
     steps:
-
+      - name: List files
+        run: ls -la
+        
       - name: Assign values
         env:
           MYMSG: "Simple message\n"
