@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: List files
         run: ls -la
+             pwd
         
       - name: Assign values
         env:
