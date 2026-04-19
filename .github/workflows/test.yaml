@@ -13,10 +13,13 @@ jobs:
 
       - name: Assign values
         env:
-          KEY: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY1: ${{ secrets.KEYSTORE_BASE64 }}
           MYMSG: "Simple message"
         run: 
           echo $KEY
           echo $MYMSG
           echo "Last line"
-        
+
+      - name: Check result
+        if: ${{ env.KEY1 == '' }}
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
