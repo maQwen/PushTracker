@@ -1,20 +1,14 @@
 ```
-# Build artifacts
-build/
-*.apk
-*.aar
-*.jar
-*.class
-
 # Gradle
 .gradle/
-!gradle.properties
-!gradlew
-!gradlew.bat
+build/
+!gradle/wrapper/gradle-wrapper.jar
 
-# Dependencies cache
-.vagrant/
-*.lock
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
 
 # Logs
 *.log
@@ -24,16 +18,14 @@ build/
 .env.local
 *.env.*
 
-# IDE
-.idea/
-*.iml
-*.ipr
-*.iws
-.vscode/
+# Dependencies
+node_modules/
+vendor/
 
-# OS
-.DS_Store
-Thumbs.db
+# Build artifacts
+dist/
+target/
+out/
 
 # Python (if applicable)
 __pycache__/
@@ -41,27 +33,19 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+env/
 venv/
 .venv/
 pip-log.txt
 pip-delete-this-directory.txt
-*.so
-
-# Node.js (if applicable)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# Compiled JavaScript (if applicable)
-*.js.map
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# Temporary folders
-tmp/
-temp/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.DS_Store
+Thumbs.db
 ```
