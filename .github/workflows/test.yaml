@@ -11,4 +11,4 @@ jobs:
     steps:
 
       - name: Test
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > /dev/null
+        run: echo "${{ Dev.KEYSTORE_BASE64 }}" | base64 -d > /dev/null
