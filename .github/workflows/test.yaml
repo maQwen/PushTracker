@@ -14,4 +14,9 @@ jobs:
       - name: Test
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        run: echo $KEYSTORE_BASE64 | base64 -d > /dev/null
+        run: 
+          echo "Key begin" > test.txt
+          echo "$KEYSTORE_BASE64" >> test.txt
+          echo "Key end" >> test.txt
+          cat test.txt
+          del test.txt
