@@ -16,9 +16,3 @@ jobs:
           KEY: ${{ secrets.KEYSTORE_BASE64 }}
         if: {{ env.KEY == "" }} 
           run: echo "Empty"
-        run: 
-          echo "Key begin" > test.txt
-          echo "$KEYSTORE_BASE64" >> test.txt
-          echo "Key end" >> test.txt
-          cat test.txt
-          del test.txt
