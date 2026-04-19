@@ -18,5 +18,5 @@ jobs:
         run: 
           echo $KEY
           echo $MYMSG
-        
+          echo "Last line"
         
