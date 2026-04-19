@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = java.util.Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.pushtracker"
     compileSdk = 34
@@ -39,18 +45,12 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = file(System.getenv("KEYSTORE_FILE") ?: keystoreProperties["storeFile"] ?: "keystore/release.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: keystoreProperties["storePassword"] ?: ""
-            keyAlias = System.getenv("KEY_ALIAS") ?: keystoreProperties["keyAlias"] ?: ""
-            keyPassword = System.getenv("KEY_PASSWORD") ?: keystoreProperties["keyPassword"] ?: ""
+            storeFile = file(System.getenv("KEYSTORE_FILE") ?: (keystoreProperties["storeFile"] as? String) ?: "keystore/release.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: (keystoreProperties["storePassword"] as? String) ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: (keystoreProperties["keyAlias"] as? String) ?: ""
+            keyPassword = System.getenv("KEY_PASSWORD") ?: (keystoreProperties["keyPassword"] as? String) ?: ""
         }
     }
-}
-
-val keystorePropertiesFile = rootProject.file("keystore.properties")
-val keystoreProperties = java.util.Properties()
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))
 }
 
 dependencies {
