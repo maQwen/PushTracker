@@ -22,4 +22,4 @@ jobs:
 
       - name: Check result
         if: ${{ env.KEY1 == '' }}
-        run: echo "$MYMSG"
+        run: echo "Empty key!"
