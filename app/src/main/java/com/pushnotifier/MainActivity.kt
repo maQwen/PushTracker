@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateEmptyState(isEmpty: Boolean) {
-        binding.emptyView.visibility = if (isEmpty) android.view.View.VISIBLE else android.view.GONE
-        binding.recyclerViewNotifications.visibility = if (isEmpty) android.view.GONE else android.view.View.VISIBLE
+        binding.emptyView.visibility = if (isEmpty) android.view.View.VISIBLE else android.view.View.GONE
+        binding.recyclerViewNotifications.visibility = if (isEmpty) android.view.View.GONE else android.view.View.VISIBLE
     }
 
     private fun deleteNotification(id: Long) {
