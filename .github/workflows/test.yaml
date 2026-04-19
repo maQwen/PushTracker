@@ -9,24 +9,18 @@ jobs:
     env:
       GRADLE_OPTS: -Dorg.gradle.parallel=false
       KEY1: ${{ secrets.KEYSTORE_BASE64 }}
+      KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
     steps:
+      - name: List files
+        run: echo $GITHUB_WORKSPACE
 
-<<<<<<< HEAD
-      - name: Test
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        run: echo "$KEYSTORE_BASE64" | base64 -d > /dev/null
-=======
-      - name: Assign values
-        env:
-          MYMSG: "Simple message\n"
-        run: 
-          echo $KEY
-          echo $MYMSG
-          echo "Last line"
+      - name: Make key file
+        run: echo $KEYSTORE_BASE64 | base64 -d > a.key
 
+      - name: List working-directory
+        run: ls -la
+        
       - name: Check result
         if: ${{ env.KEY1 == '' }}
         run: echo "Empty key!"
->>>>>>> b8a3d09a9c0a994d22da0a18e765c948a7e1c389
