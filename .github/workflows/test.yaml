@@ -13,7 +13,10 @@ jobs:
 
       - name: Test
         env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY: ${{ secrets.KEYSTORE_BASE64 }}
+        if: {{ env.KEY == "" }} 
+          run: echo "Empty"
+        
         run: 
           echo "Key begin" > test.txt
           echo "$KEYSTORE_BASE64" >> test.txt
