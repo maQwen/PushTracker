@@ -31,7 +31,9 @@ jobs:
         run: mkdir -p keystore
 
       - name: Decode and Write Keystore File
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore/release.keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: echo "$KEYSTORE_BASE64" | base64 -d > keystore/release.keystore
 
       - name: Build Signed Release APK
         run: ./gradlew assembleRelease
