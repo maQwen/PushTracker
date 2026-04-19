@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GRADLE_OPTS: -Dorg.gradle.parallel=false
+      KEY1: ${{ secrets.KEYSTORE_BASE64 }}
 
     steps:
 
       - name: Assign values
         env:
-          KEY1: ${{ secrets.KEYSTORE_BASE64 }}
-          MYMSG: "Simple message"
+          MYMSG: "Simple message\n"
         run: 
           echo $KEY
           echo $MYMSG
