@@ -11,8 +11,10 @@ jobs:
 
     steps:
 
-      - name: Test
+      - name: Assign values
         env:
           KEY: ${{ secrets.KEYSTORE_BASE64 }}
-        if: {{ env.KEY == "" }} 
-          run: echo "Empty"
+          MYMSG: "Simple message"
+        run: echo {{ $MYMSG }}
+        
+        
