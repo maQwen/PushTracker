@@ -21,5 +21,5 @@ jobs:
           echo "Last line"
 
       - name: Check result
-        if: ${{ env.KEY1 == '11' }}
-        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        if: ${{ env.KEY1 == '' }}
+        run: echo "$MYMSG"
