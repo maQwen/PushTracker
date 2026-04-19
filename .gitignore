@@ -2,13 +2,9 @@
 # Gradle
 .gradle/
 build/
-!gradle/wrapper/gradle-wrapper.jar
 
-# IDE
-.idea/
-*.iml
-*.ipr
-*.iws
+# Dependencies
+.libs/
 
 # Logs
 *.log
@@ -18,34 +14,11 @@ build/
 .env.local
 *.env.*
 
-# Dependencies
-node_modules/
-vendor/
+# IDE
+.idea/
+.vscode/
 
-# Build artifacts
-dist/
-target/
-out/
-
-# Python (if applicable)
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
+# OS
 .DS_Store
 Thumbs.db
 ```
