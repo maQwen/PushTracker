@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: List files
         run: ls -la
-             pwd
+             echo $GITHUB_WORKSPACE
         
       - name: Assign values
         env:
