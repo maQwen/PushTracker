@@ -2,9 +2,6 @@ name: Test
 
 on:
   workflow_dispatch:
-    secrets: inputs:
-      KEYSTORE_BASE64:
-        reqired: true
 
 jobs:
   publish:
