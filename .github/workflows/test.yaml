@@ -29,4 +29,4 @@ jobs:
         run: echo "Empty key!"
 
       - name: Check key
-        keytool -list -keystore app/release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
+        run: keytool -list -keystore app/release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
