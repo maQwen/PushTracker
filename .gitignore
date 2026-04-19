@@ -1,17 +1,34 @@
+# Android build artifacts
+build/
+.gradle/
+*.apk
+*.aar
+*.dex
+
+# Android studio files
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea
+*.iws
+.local.properties
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# Python cache (if any Python components)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node dependencies (if any JavaScript/React Native components)
+node_modules/
+
+# OS generated files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-
-# Keystore files
-*.jks
-*.keystore
-
-# Google Services
-google-services.json
+Thumbs.db
+.vscode/
