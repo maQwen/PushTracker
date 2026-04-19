@@ -10,17 +10,23 @@ jobs:
       GRADLE_OPTS: -Dorg.gradle.parallel=false
       KEY1: ${{ secrets.KEYSTORE_BASE64 }}
       KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
     steps:
       - name: List files
         run: echo $GITHUB_WORKSPACE
 
       - name: Make key file
-        run: echo $KEYSTORE_BASE64 | base64 -d > a.key
+        run: echo $KEYSTORE_BASE64 | base64 -d > app/release.keystore
 
       - name: List working-directory
-        run: ls -la
+        run: ls -la app/*
         
       - name: Check result
         if: ${{ env.KEY1 == '' }}
         run: echo "Empty key!"
+
+      - name: Check key
+        keytool -list -keystore app/release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
