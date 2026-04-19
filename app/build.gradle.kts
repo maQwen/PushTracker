@@ -24,6 +24,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -36,6 +37,20 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file(System.getenv("KEYSTORE_FILE") ?: keystoreProperties["storeFile"] ?: "keystore/release.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: keystoreProperties["storePassword"] ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: keystoreProperties["keyAlias"] ?: ""
+            keyPassword = System.getenv("KEY_PASSWORD") ?: keystoreProperties["keyPassword"] ?: ""
+        }
+    }
+}
+
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = java.util.Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))
 }
 
 dependencies {
