@@ -28,16 +28,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Create Keystore Directory
-        run: mkdir -p keystore
-
       - name: Decode and Write Keystore File
-        run: echo $KEYSTORE_BASE64 | base64 -d > keystore/release.keystore
+        run: echo $KEYSTORE_BASE64 | base64 -d > app/release.keystore
 
       - name: Build Signed Release APK
         run: ./gradlew assembleRelease
         env:
-          KEYSTORE_FILE: keystore/release.keystore
+          KEYSTORE_FILE: app/release.keystore
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
