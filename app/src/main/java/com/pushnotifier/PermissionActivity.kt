@@ -51,8 +51,16 @@ class PermissionActivity : AppCompatActivity() {
             .setPositiveButton(getString(R.string.grant_permission)) { _, _ ->
                 openNotificationListenerSettings()
             }
-            .setNegativeButton(getString(R.string.settings)) { _, _ ->
-                openNotificationListenerSettings()
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+                // Show message that permission is required and keep the activity open
+                Toast.makeText(this, getString(R.string.permission_required_message), Toast.LENGTH_LONG).show()
+                // Show the dialog again after a short delay
+                android.os.Handler(mainLooper).postDelayed({
+                    if (!isFinishing && !isDestroyed) {
+                        showPermissionRequest()
+                    }
+                }, 1000)
             }
             .setCancelable(false)
             .setOnDismissListener { 
