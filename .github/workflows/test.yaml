@@ -19,7 +19,7 @@ jobs:
         run: echo $GITHUB_WORKSPACE
 
       - name: Make key file
-        run: echo $KEYSTORE_BASE64 | base64 -d > app/release.keystore
+        run: echo $KEYSTORE_BASE64 | base64 -d > release.keystore
 
       - name: List working-directory
         run: ls -la app/*
@@ -29,4 +29,4 @@ jobs:
         run: echo "Empty key!"
 
       - name: Check key
-        keytool -list -keystore app/release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
+        keytool -list -keystore release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
