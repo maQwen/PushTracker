@@ -22,11 +22,11 @@ jobs:
         run: echo $KEYSTORE_BASE64 | base64 -d > release.keystore
 
       - name: List working-directory
-        run: ls -la app/*
+        run: ls -la
         
       - name: Check result
         if: ${{ env.KEY1 == '' }}
         run: echo "Empty key!"
 
       - name: Check key
-        keytool -list -keystore release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
+        run: keytool -list -keystore release.keystore -alias $KEY_ALIAS -storepass $KEYSTORE_PASSWORD
