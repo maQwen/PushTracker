@@ -48,9 +48,9 @@ jobs:
 
       - name: Create Release
         uses: softprops/action-gh-release@v3
+        env:
+          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: ${{ steps.tag_name.outputs.TAG_NAME }}
+          tag_name: $RELEASE_TOKEN
           files: app/build/outputs/apk/release/app-release.apk
           generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
