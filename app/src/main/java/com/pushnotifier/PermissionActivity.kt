@@ -26,6 +26,7 @@ class PermissionActivity : AppCompatActivity() {
 
         // Show permission request UI
         showPermissionRequest()
+        // Don't finish here - wait for user to grant permission
     }
 
     private fun isNotificationServiceEnabled(): Boolean {
@@ -54,6 +55,13 @@ class PermissionActivity : AppCompatActivity() {
                 openNotificationListenerSettings()
             }
             .setCancelable(false)
+            .setOnDismissListener { 
+                // If dialog is dismissed without action, check permission again
+                if (isNotificationServiceEnabled()) {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+            }
             .show()
     }
 
