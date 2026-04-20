@@ -87,29 +87,47 @@ The `PushNotificationListener` class extends `NotificationListenerService` to in
 1. The system calls `onNotificationPosted()`
 2. The app extracts title, message, package name, and extras
 3. Creates a `PushNotification` entity
-4. Saves it to the Room database
+4. Saves it to the Room database using coroutines
 
 ### Room Database
-The app uses Room for SQLite database operations:
+The app uses Room for SQLite database operations with Kotlin Flow for reactive data:
 
-- **Entity**: `PushNotification` - stores notification data
-- **DAO**: `PushNotificationDao` - database access methods
-- **Database**: `AppDatabase` - Room database configuration
+- **Entity**: `PushNotification` - stores notification data (id, title, message, package, timestamp)
+- **DAO**: `PushNotificationDao` - database access methods with Flow-based queries
+- **Database**: `AppDatabase` - Room database configuration with singleton pattern
 
-### UI
-- **PermissionActivity**: Checks and requests notification access permission
+### UI Architecture
+- **PermissionActivity**: Entry point that checks and requests notification access permission
+  - Shows an AlertDialog explaining the required permission
+  - Opens system settings for the user to enable the notification listener
+  - Uses `onResume()` to detect when permission is granted and navigates to MainActivity
+  - Does NOT close immediately - waits for user action
+  
 - **MainActivity**: Displays notifications in a RecyclerView
+  - Uses ViewBinding for type-safe view access
+  - Observes database changes via Flow with `collectLatest`
+  - Automatically updates UI when new notifications arrive
+  - Shows empty state view when no notifications exist
+  
 - **PushNotificationAdapter**: Binds notification data to list items
+  - Supports individual item deletion
+  - Displays formatted timestamps
 
 ## Usage
 
-1. Launch the app and grant notification access permission
-2. All incoming notifications from other apps will be captured
-3. View notifications in the main screen
+1. Launch the app - PermissionActivity opens first
+2. Grant notification access permission:
+   - Tap "Grant Permission" in the dialog
+   - Find "Push Notifier" in the system settings list
+   - Enable the toggle
+   - Return to the app (it will automatically navigate to the main screen)
+3. **View captured notifications**: The main screen displays a list of all captured notifications in real-time
+   - If no notifications have been captured yet, an empty state message is shown
+   - New notifications appear automatically as they arrive
 4. Use the toolbar menu to:
-   - Refresh the list
-   - Clear all notifications
-5. Delete individual notifications using the "Delete" button
+   - Refresh the list (manual refresh)
+   - Clear all notifications at once
+5. Delete individual notifications using the "Delete" button on each item
 
 ## Important Notes
 
