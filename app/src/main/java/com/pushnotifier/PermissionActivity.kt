@@ -1,35 +1,47 @@
 package com.pushtracker
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 
-class PermissionActivity : AppCompatActivity() {
+class PermissionActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Check if notification listener is already enabled
+        
+        setContent {
+            MaterialTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    PermissionScreen(
+                        onGrantPermission = { openNotificationListenerSettings() }
+                    )
+                }
+            }
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
         if (isNotificationServiceEnabled()) {
-            // Permission granted, start main activity
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-            return
         }
-
-        // Show permission request UI
-        showPermissionRequest()
-        // Don't finish here - wait for user to grant permission
     }
-
+    
     private fun isNotificationServiceEnabled(): Boolean {
         val packageName = this.packageName
         val flat = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
@@ -44,47 +56,85 @@ class PermissionActivity : AppCompatActivity() {
         }
         return false
     }
-
-    private fun showPermissionRequest() {
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.permission_required))
-            .setMessage(getString(R.string.notification_listener_description))
-            .setPositiveButton(getString(R.string.grant_permission)) { _, _ ->
-                openNotificationListenerSettings()
-            }
-            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
-                dialog.dismiss()
-                // Show message that permission is required and keep the activity open
-                Toast.makeText(this, getString(R.string.permission_required_message), Toast.LENGTH_LONG).show()
-                // Show the dialog again after a short delay
-                android.os.Handler(mainLooper).postDelayed({
-                    if (!isFinishing && !isDestroyed) {
-                        showPermissionRequest()
-                    }
-                }, 1000)
-            }
-            .setCancelable(false)
-            .setOnDismissListener { 
-                // If dialog is dismissed without action, check permission again
-                if (isNotificationServiceEnabled()) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
-            }
-            .show()
-    }
-
+    
     private fun openNotificationListenerSettings() {
         val intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
         startActivity(intent)
     }
+}
 
-    override fun onResume() {
-        super.onResume()
-        // Check again if permission was granted
-        if (isNotificationServiceEnabled()) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+@Composable
+fun PermissionScreen(onGrantPermission: () -> Unit) {
+    var showDialog by remember { mutableStateOf(true) }
+    
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(32.dp)
+        ) {
+            Text(
+                text = "Notification Access Required",
+                fontSize = 24.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            Text(
+                text = "Push Tracker needs notification access to capture and save incoming notifications from other apps.",
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+            )
+            
+            Spacer(modifier = Modifier.height(32.dp))
+            
+            Button(onClick = onGrantPermission) {
+                Text("Grant Permission")
+            }
+        }
+    }
+    
+    if (showDialog) {
+        Dialog(onDismissRequest = { }) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(24.dp)
+                ) {
+                    Text(
+                        text = "Permission Required",
+                        fontSize = 20.sp,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    )
+                    
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    Text(
+                        text = "This app needs notification access permission to function. Please grant the permission to continue using the app.",
+                        fontSize = 16.sp
+                    )
+                    
+                    Spacer(modifier = Modifier.height(24.dp))
+                    
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        TextButton(onClick = onGrantPermission) {
+                            Text("Grant Permission")
+                        }
+                    }
+                }
+            }
         }
     }
 }
